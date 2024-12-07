@@ -1,0 +1,15 @@
+SELECT
+    name AS Name,
+    price AS Price,
+    traderange AS TradeRange,
+    volume AS Volume,
+    market_Cap AS MarketCapValue,
+    System.Timestamp AS EventTime
+INTO
+    [output]
+FROM
+    IoTHubInput
+WHERE
+    price > 20
+GROUP BY
+    name, TumblingWindow(second, 60)
